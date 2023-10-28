@@ -2,6 +2,7 @@
 
 run_script=false
 
+# see if the picocd is already in the bashrc file
 bashrc_alias=$(grep --no-ignore-case -F "alias picocd=" ~/.bashrc | awk "NR==1{print;exit}")
 
 if [[ $bashrc_alias ]]; then
@@ -12,6 +13,8 @@ else
   read -p "Do you want it to be defined? [y|n] : " -r answer
   if [[ "$answer" = "y" ]]; then
     ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
+
+    # add the alias to bashrc
     cat >> ~/.bashrc << EOL
 
 # pico opencd launch script alias
